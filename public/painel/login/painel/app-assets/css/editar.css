@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;   
+}
+
+body{
+    background-color: #1d2228;
+}
+h1{
+    font-family: 'Oswald', sans-serif;
+    font-size: 40px;
+    text-align: center;
+    margin-top: 50px;
+    color: white;
+    margin-bottom: 50px;
+}
+#voltar{
+    float: right;
+    font-size: 20px;
+    color: #ed4e53;
+    padding: 25px;
+    text-decoration: none;
+}
+form{
+    width: 100%;
+}
+label{
+    cursor: pointer;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #78838c!important;
+    font-family: 'Open Sans', sans-serif;
+}
+input{
+    font-size: 15px;
+    line-height: 1.33333;
+    font-weight: 300;
+    display: block;
+    width: 100%;
+    padding: 0 14px;
+    color: #000;
+    border: 2px solid hsla(207,8%,51%,.5);
+    border-radius: 4px;
+    background-color: #fff;
+    background-clip: padding-box;
+    -webkit-transition: border .2s ease-in;
+    transition: border .2s ease-in;
+    min-height: 44px;
+    outline: none;
+}
+.edit{
+    border: #d9dde3 solid 1px;
+    padding: 25px;
+    margin: auto;
+    margin-bottom: 50px;
+    width: 60%;
+    margin-top: 50px;
+}
+#enviar{
+    font-size: 16px;
+    align-items: center;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    font-weight: 600;
+    justify-content: center;
+    min-height: 44px;
+    outline: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+    position: relative;
+    text-decoration: none;
+    width: 35%;
+   
+    background-color:  #70a401;
+    color: white;
+    margin: auto; 
+}
+#enviar:hover{
+    transition: all 0.5s;
+    background-color:#ed4e53 ;
+}
