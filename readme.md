@@ -43,7 +43,7 @@ Siga os passos abaixo para instalar o **TriunfoStore**:
 
 1. Clone o repositório:
     ```sh
-    git clone https://github.com/seu-usuario/TriunfoStore.git
+    git clone https://github.com/TriunfoCenter/TriunfoStore.git
     ```
 2. Navegue até o diretório do projeto:
     ```sh
@@ -78,7 +78,7 @@ Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
 
 Gabriel José Silva - [ssuporte@triunfostore.com.br](mailto:ssuporte@triunfostore.com.br)
 
-Projeto Link: [https://github.com/seu-usuario/TriunfoStore](https://github.com/seu-usuario/Triunfostore)
+Projeto Link: [https://github.com/TriunfoCenter/TriunfoStore](https://github.com/TriunfoCenter/Triunfostore)
 
 ---
 
