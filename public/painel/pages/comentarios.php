@@ -30,7 +30,7 @@ if ($resultt->num_rows == 1) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Corona Admin</title>
+    <title>Painel Admin - TriunfoStore</title>
     <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="../../assets/vendors/select2/select2.min.css">
@@ -128,7 +128,7 @@ if ($resultt->num_rows == 1) {
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="listarprodutos.php">Gerenciar produtos</a></li>
                 <li class="nav-item"> <a class="nav-link" href="adicionarproduto.php">Adicionar novo produto</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">Analytics</a></li>
+                
               </ul>
             </div>
           </li>
@@ -222,59 +222,15 @@ if ($resultt->num_rows == 1) {
                   <p class="p-3 mb-0 text-center">See all projects</p>
                 </div>
               </li>
-              <li class="nav-item nav-settings d-none d-lg-block">
-                <a class="nav-link" href="#">
-                  <i class="mdi mdi-view-grid"></i>
-                </a>
-              </li>
-              <li class="nav-item dropdown border-left">
-                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="mdi mdi-email"></i>
-                  <span class="count bg-success"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                  <h6 class="p-3 mb-0">Messages</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img src="../../assets/images/faces/face4.jpg" alt="image" class="rounded-circle profile-pic">
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">Mark send you a message</p>
-                      <p class="text-muted mb-0"> 1 Minutes ago </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img src="../../assets/images/faces/face2.jpg" alt="image" class="rounded-circle profile-pic">
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">Cregh send you a message</p>
-                      <p class="text-muted mb-0"> 15 Minutes ago </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img src="../../assets/images/faces/face3.jpg" alt="image" class="rounded-circle profile-pic">
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">Profile picture updated</p>
-                      <p class="text-muted mb-0"> 18 Minutes ago </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">4 new messages</p>
-                </div>
-              </li>
+              
+              
               <li class="nav-item dropdown border-left">
                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
                   <i class="mdi mdi-bell"></i>
                   <span class="count bg-danger"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                  <h6 class="p-3 mb-0">Notifications</h6>
+                  <h6 class="p-3 mb-0">Notificações</h6>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item preview-item">
                     <div class="preview-thumbnail">
@@ -312,7 +268,7 @@ if ($resultt->num_rows == 1) {
                     </div>
                   </a>
                   <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">See all notifications</p>
+                  <p class="p-3 mb-0 text-center">Veja as notificações</p>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -385,7 +341,7 @@ if ($resultt->num_rows == 1) {
                             <th> Data </th>
                             <th> Hora </th>
                             <th> Texto </th>
-                            <th> Config </th>
+                            <th> Excluir </th>
                           </tr>
                         </thead>
                         <tbody>
@@ -412,20 +368,13 @@ if ($resultt->num_rows == 1) {
         echo '<td class="py-1">';
         echo '<img src="../../assets/images/faces-clipart/pic-1.png" alt="image" />';
         echo '</td>';
-        echo '<td>' . $nome . '</td>'; // Corrigido aqui
-        echo '<td>' . $data . '</td>'; // Corrigido aqui
-        echo '<td>' . $hora . '</td>'; // Corrigido aqui
-        echo '<td>' . $texto . '</td>'; // Corrigido aqui
+        echo '<td>' . $nome . '</td>'; 
+        echo '<td>' . $data . '</td>'; 
+        echo '<td>' . $hora . '</td>'; 
+        echo '<td>' . $texto . '</td>'; 
         echo '<td>';
         echo '<div class="table-actions">';
-        echo '<a class="btn btn-sm btn-icon btn-primary" href="https://wowy.botble.com/admin/system/roles/edit/1" data-bs-toggle="tooltip" data-bs-original-title="Edit">';
-        echo '<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: 6px auto 0;">';
-        echo '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>';
-        echo '<path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>';
-        echo '<path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>';
-        echo '<path d="M16 5l3 3"></path>';
-        echo '</svg>';    
-        echo '</a>';
+       
         echo '<a class="btn btn-sm btn-icon btn-danger" href="https://wowy.botble.com/admin/system/roles/1" data-bs-toggle="tooltip" data-bs-original-title="Delete" data-dt-single-action="" data-method="DELETE" data-confirmation-modal="true" data-confirmation-modal-title="Confirm delete" data-confirmation-modal-message="Do you really want to delete this record?" data-confirmation-modal-button="Delete" data-confirmation-modal-cancel-button="Cancel">';
         echo '<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: 6px auto 0;">';
         echo '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>';

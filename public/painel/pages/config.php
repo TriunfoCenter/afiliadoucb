@@ -11,7 +11,7 @@ $resultt = $conn->query($sql);
 $sql = "SELECT whatsapp, facebook, linkedin, twitter, Youtube, Instagram FROM redessociais WHERE id = 1";
 $result = $conn->query($sql);
 
-$sql = "SELECT chavepix, carteirabtc, token, googlerecaptchakey, googlerecaptchasecret, verifyemail, verifysms, mobileordesktop, manutencao FROM config WHERE id = 1";
+$sql = "SELECT chavepix, carteirabtc, token, googlerecaptchakey, googlerecaptchasecret, verifyemail, verifysms, mobileordesktop, manutencao, vencimentoboleto, nomeloja FROM config WHERE id = 1";
 $resultad = $conn->query($sql);
 
 
@@ -23,8 +23,6 @@ if ($result) {
   $twitter = $row['twitter'];
   $youtube = $row['Youtube'];
   $instagram = $row['Instagram'];
-} else {
-  // Trate erros na consulta, se necessário
 }
 
 
@@ -39,6 +37,10 @@ if ($resultad) {
   $verifysms = $row['verifysms'];
   $mobileordesktop = $row['mobileordesktop'];
   $manutencao = $row['manutencao'];
+  $vencimentoboleto = $row['vencimentoboleto'];
+  $nomeloja = $row['nomeloja'];
+  
+  
 } else {
  
 }
@@ -74,7 +76,7 @@ mysqli_close($conn);
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Corona Admin</title>
+    <title>Painel Admin - TriunfoStore</title>
     
     <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
@@ -176,7 +178,7 @@ mysqli_close($conn);
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="listarprodutos.php">Gerenciar produtos</a></li>
                 <li class="nav-item"> <a class="nav-link" href="adicionarproduto.php">Adicionar novo produto</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">Analytics</a></li>
+                
               </ul>
             </div>
           </li>
@@ -268,59 +270,15 @@ mysqli_close($conn);
                   <p class="p-3 mb-0 text-center">See all projects</p>
                 </div>
               </li>
-              <li class="nav-item nav-settings d-none d-lg-block">
-                <a class="nav-link" href="#">
-                  <i class="mdi mdi-view-grid"></i>
-                </a>
-              </li>
-              <li class="nav-item dropdown border-left">
-                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="mdi mdi-email"></i>
-                  <span class="count bg-success"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                  <h6 class="p-3 mb-0">Messages</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img src="../../assets/images/faces/face4.jpg" alt="image" class="rounded-circle profile-pic">
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">Mark send you a message</p>
-                      <p class="text-muted mb-0"> 1 Minutes ago </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img src="../../assets/images/faces/face2.jpg" alt="image" class="rounded-circle profile-pic">
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">Cregh send you a message</p>
-                      <p class="text-muted mb-0"> 15 Minutes ago </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img src="../../assets/images/faces/face3.jpg" alt="image" class="rounded-circle profile-pic">
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">Profile picture updated</p>
-                      <p class="text-muted mb-0"> 18 Minutes ago </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">4 new messages</p>
-                </div>
-              </li>
+              
+              
               <li class="nav-item dropdown border-left">
                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
                   <i class="mdi mdi-bell"></i>
                   <span class="count bg-danger"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                  <h6 class="p-3 mb-0">Notifications</h6>
+                  <h6 class="p-3 mb-0">Notificações</h6>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item preview-item">
                     <div class="preview-thumbnail">
@@ -358,7 +316,7 @@ mysqli_close($conn);
                     </div>
                   </a>
                   <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">See all notifications</p>
+                  <p class="p-3 mb-0 text-center">Veja as notificações</p>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -511,6 +469,27 @@ mysqli_close($conn);
                       <div class="form-group">
                         <label for="exampleInputEmail1">Google Recaptcha Secret</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" placeholder="<?php echo $googlerecaptchasecret; ?>" value="<?php echo $googlerecaptchasecret; ?>">
+                      </div>
+                      
+                      <button type="submit" class="btn btn-primary me-2">Enviar</button>
+                      
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Config</h4>
+                    <form class="forms-sample">
+                      <div class="form-group">
+                        <label for="exampleInputUsername1">Nome da Loja</label>
+                        <input type="text" class="form-control" id="vencimentoBoleto" name="vencimentoBoleto" placeholder="<?php echo $nomeloja; ?>" value="<?php echo $nomeloja; ?>">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputUsername1">Dia do vencimento do boleto</label>
+                        <input type="text" class="form-control" id="vencimentoBoleto" name="vencimentoBoleto" placeholder="<?php echo $vencimentoboleto; ?>" value="<?php echo $vencimentoboleto; ?>">
                       </div>
                       
                       <button type="submit" class="btn btn-primary me-2">Enviar</button>

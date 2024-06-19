@@ -1,0 +1,18 @@
+Gerenciar comentarios tambem, copiar os comentarios do proprio codigo fonte, porem gerenciar comentarios tambem para que possa apagar ou adicionar um
+
+colocar encurtador como categoria e fazer o encurtador
+logo de tesoura
+
+ter a opção de extrair o banco de dados em json para caso de backup 
+
+o listarprodutos tem que ter
+
+a imagem 
+o nome 
+o valor
+se boleto e pix ta ativado
+
+e o link completo do produto da tela 
+
+editar como botão
+e excluir

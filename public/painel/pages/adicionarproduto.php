@@ -7,14 +7,8 @@ $sql = "SELECT * FROM admin WHERE id = 1";
 $resultt = $conn->query($sql);
 
 if ($resultt->num_rows == 1) {
-  
   $dados = $resultt->fetch_assoc();
-
   $nomeLogin = ucfirst(strtolower($dados['login']));
-
-  
-
-
 } else {
   echo "Nenhum resultado encontrado.";
 }
@@ -27,7 +21,7 @@ if ($resultt->num_rows == 1) {
    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ADMIN - RAUL CASTRO</title>
+    <title>Painel Admin - TriunfoStore</title>
     
     <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
@@ -127,7 +121,7 @@ if ($resultt->num_rows == 1) {
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="listarprodutos.php">Gerenciar produtos</a></li>
                 <li class="nav-item"> <a class="nav-link" href="adicionarproduto.php">Adicionar novo produto</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">Analytics</a></li>
+                
               </ul>
             </div>
           </li>
@@ -219,59 +213,15 @@ if ($resultt->num_rows == 1) {
                   <p class="p-3 mb-0 text-center">See all projects</p>
                 </div>
               </li>
-              <li class="nav-item nav-settings d-none d-lg-block">
-                <a class="nav-link" href="#">
-                  <i class="mdi mdi-view-grid"></i>
-                </a>
-              </li>
-              <li class="nav-item dropdown border-left">
-                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="mdi mdi-email"></i>
-                  <span class="count bg-success"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                  <h6 class="p-3 mb-0">Messages</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img src="../../assets/images/faces/face4.jpg" alt="image" class="rounded-circle profile-pic">
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">Mark send you a message</p>
-                      <p class="text-muted mb-0"> 1 Minutes ago </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img src="../../assets/images/faces/face2.jpg" alt="image" class="rounded-circle profile-pic">
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">Cregh send you a message</p>
-                      <p class="text-muted mb-0"> 15 Minutes ago </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img src="../../assets/images/faces/face3.jpg" alt="image" class="rounded-circle profile-pic">
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">Profile picture updated</p>
-                      <p class="text-muted mb-0"> 18 Minutes ago </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">4 new messages</p>
-                </div>
-              </li>
+              
+              
               <li class="nav-item dropdown border-left">
                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
                   <i class="mdi mdi-bell"></i>
                   <span class="count bg-danger"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                  <h6 class="p-3 mb-0">Notifications</h6>
+                  <h6 class="p-3 mb-0">Notificações</h6>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item preview-item">
                     <div class="preview-thumbnail">
@@ -309,7 +259,7 @@ if ($resultt->num_rows == 1) {
                     </div>
                   </a>
                   <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">See all notifications</p>
+                  <p class="p-3 mb-0 text-center">Veja as notificações</p>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -354,133 +304,31 @@ if ($resultt->num_rows == 1) {
         </nav>
         
         <div class="main-panel">
-          <div class="content-wrapper">
-            <div class="page-header">
-              <h3 class="page-title"> Adicionar Produto </h3>
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Forms</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Adicionar Produto</li>
-                </ol>
-              </nav>
-            </div>
-            <div class="row">
-              <div class="col-12 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Adicionar Produto</h4>
-                    <p class="card-description"> TriunfoVeloz v2 </p>
-                    <form class="forms-sample">
-                      <div class="form-group">
-                        <label for="exampleInputModelo1">Modelo</label>
-                        <input type="text" class="form-control" id="exampleInputModelo1" placeholder="Modelo">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputMarca3">Marca</label>
-                        <input type="text" class="form-control" id="exampleInputMarca3" placeholder="Marca">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputTexto4">Texto</label>
-                        <input type="text" class="form-control" id="exampleInputTexto4" placeholder="Texto">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputRiscado4">Valor Riscado</label>
-                        <input type="text" class="form-control" id="exampleInputRiscado4" placeholder="Valor Riscado">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputAtual4">Valor Atual</label>
-                        <input type="text" class="form-control" id="exampleInputAtual4" placeholder="Valor Atual">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputPix4">Valor Pix</label>
-                        <input type="text" class="form-control" id="exampleInputPix4" placeholder="Valor Pix">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputTamanho4">Tamanho</label>
-                        <input type="text" class="form-control" id="exampleInputTamanho4" placeholder="Tamanho">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputTamanho4">Quantidade</label>
-                        <input type="text" class="form-control" id="exampleInputTamanho4" placeholder="Quantidade">
-                      </div>
-                      
-                    
-                      <div class="form-group">
-                        <label for="exampleSelectGender">Categoria</label>
-                        <select class="form-control" id="exampleSelectGender">
-                          <option>Aro13</option>
-                          <option>Aro14</option>
-                        </select>
-                      </div>
-                      <fieldset class="form-fieldset stock-status-wrapper">
-                        <label class="form-label" for="stock_status">Estoque</label>
-                        <div class="form-check form-check-inline mb-3">
-                            <input type="radio" name="stock_status" class="form-check-input" value="in_stock" checked="">
-                            <span class="form-check-label">Em estoque</span>
-                        </div>
-                        <div class="form-check form-check-inline mb-3">
-                            <input type="radio" name="stock_status" class="form-check-input" value="out_of_stock">
-                            <span class="form-check-label">Sem estoque</span>
-                        </div>
-                        <div class="form-check form-check-inline mb-3">
-                            <input type="radio" name="stock_status" class="form-check-input" value="on_backorder">
-                            <span class="form-check-label">Encomenda</span>
-                        </div>
-                    </fieldset>
-                    <div>
-                      <fieldset class="form-fieldset stock-status-wrapper">
-                        <label class="form-label" for="stock_status">Redirecionamento pro whatsapp</label>
-                        <div class="form-check form-check-inline mb-3">
-                            <input type="radio" name="stock_status" class="form-check-input" value="in_stock" checked="">
-                            <span class="form-check-label">Sim</span>
-                        </div>
-                        <div class="form-check form-check-inline mb-3">
-                            <input type="radio" name="stock_status" class="form-check-input" value="out_of_stock">
-                            <span class="form-check-label">Não</span>
-                        </div>
-                    </fieldset>
-
-                  </fieldset>
-                  <div>
-
-                      <label for="exampleInputPix4">Formas de Pagamento</label>
-                    <div class="form-check form-switch">
-                      
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                      <label class="form-check-label" for="flexSwitchCheckDefault">ACEITAR CARTÃO</label>
-                    </div>
-
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                      <label class="form-check-label" for="flexSwitchCheckDefault">ACEITAR PIX</label>
-                    </div>
-
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                      <label class="form-check-label" for="flexSwitchCheckDefault">ACEITAR BOLETO</label>
-                    </div>
-
-                  </div>
-                      <div class="form-group">
-                        <label>Imagem</label>
-                        <input type="file" name="img[]" class="file-upload-default">
-                        <div class="input-group col-xs-12">
-                          <input type="text" class="form-control file-upload-info" disabled placeholder="Carregue a imagem">
-                          <span class="input-group-append">
-                            <button class="file-upload-browse btn btn-primary" type="button">Buscar</button>
-                          </span>
-                        </div>
-                      </div>
-                      
-                      <button type="submit" class="btn btn-primary me-2">Adicionar</button>
-                      <button class="btn btn-dark">Cancelar</button>
-                    </form>
-                  </div>
-                </div>
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title"> Produtos </h3>
+    </div>
+    <div class="row">
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Adicionar Produto</h4>
+            <p class="card-description"> TriunfoStore v1 </p>
+            <form class="forms-sample" action="adicionarproduto2.php" method="POST">
+              <div class="form-group">
+                <label for="exampleInputModelo1">Link do produto:</label>
+                <input type="text" class="form-control" id="exampleInputModelo1" name="linkProduto" placeholder='Ex: "https://www.casasbahia.com.br/geladeira-smart-samsung-frost-free-french-door-rf27-com-soundbar-564l-black-inox/p/55066330"'>
               </div>
-              </div>
-            </div>
+              <button type="submit" class="btn btn-primary me-2">Continuar</button>
+            </form>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
           
         </div>
         
