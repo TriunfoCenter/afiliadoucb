@@ -1,0 +1,33 @@
+a descrição fica em
+<meta property="og:description" content=
+
+
+
+<meta property="og:description" content="A linha Moto G ganhou um modelo de peso. Apresento o &lt;strong&gt;Moto G24 Rosa&lt;\strong&gt;, um smartphone que unifica elegância, desempenho e inovação, tudo o que você precisa para viver a vida no ritmo acelerado dos dias modernos.
+
+Armazenamento amplo: com uma generosa capacidade de 128GB de armazenamento interno, o Moto G24 permite que você mantenha todos os seus arquivos, fotos e aplicativos essenciais sempre à mão. Liberte-se da preocupação com espaço e concentre-se no que realmente importa.
+
+Mais performance: RAM Boost (Otimização de RAM) é um recurso nativo que aumenta sua quantidade máxima de memória RAM usando parte do armazenamento interno como memória virtual. Em outras palavras, ele diminui temporariamente parte do armazenamento interno que seria usado para guardar arquivos como fotos, vídeos e afins para aumentar sua memória RAM, aprimorando a performance do celular. Neste modelo, temos memória RAM (Física) de 4GB + RAM Boost (Virtual) de até 4GB, totalizando 8GB.
+
+Desempenho poderoso: equipado com um processador octa-core, o G24 oferece desempenho rápido e eficiente. Execute aplicativos exigentes, desfrute de jogos envolventes e navegue na web com fluidez, sem comprometer a velocidade.
+
+Outros pontos fortes desse aparelho é a tela de 6.6&quot;, a bateria poderosa de 5.000mhA com carregador TurboPower e a câmera traseira dupla com resolução principal de 50MP. Não é demais?
+
+Seja ousado, seja inovador: Moto G24 Rosa, onde estilo e tecnologia se encontram." />
+
+
+
+Avaliações fica em review
+ex:
+"Review": {
+              "rating": 5,
+              "recommendationPercentage": 99,
+              "ratingQty": 800,
+              "userReviews": [{
+                "id": 17529422,
+                "text": "gostei muito do produto que foi comprado para dar a minha mãe de 78 anos. O manuseio é simples e o produto é lindo.",
+                "rating": 5,
+                "name": "Giovana",
+                "date": "04/06/24",
+                "dislikes": 3,
+                "likes": 12,
