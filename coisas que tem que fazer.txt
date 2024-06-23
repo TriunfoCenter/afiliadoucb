@@ -16,3 +16,6 @@ e o link completo do produto da tela
 
 editar como botão
 e excluir
+
+arrumar a logo da pagina index, a pequena quando encurtece o menu
+

@@ -257,7 +257,7 @@ if ($resultt->num_rows == 1) {
                   <a class="dropdown-item preview-item">
                     <div class="preview-thumbnail">
                       <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-calendar text-success"></i>
+                        <i class="mdi mdi-file-document text-success"></i>
                       </div>
                     </div>
                     <div class="preview-item-content">

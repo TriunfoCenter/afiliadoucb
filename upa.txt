@@ -1,0 +1,19 @@
+Notificações
+
+Pedido Concluido
+Pagamento pendente
+Boleto Gerado
+
+
+
+Pedido concluido
+{PRIMEIRO NOME} comprou R${REAIS} no {formaPagamento}
+
+
+Pagamento Pendente
+{PRIMEIRO NOME} gerou pix QrCode no valor de R${REAIS}
+
+
+Boleto Gerado
+{PRIMEIRO NOME} gerou boleto no valor de R${REAIS} 
+

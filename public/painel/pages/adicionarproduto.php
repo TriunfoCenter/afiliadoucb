@@ -314,10 +314,10 @@ if ($resultt->num_rows == 1) {
           <div class="card-body">
             <h4 class="card-title">Adicionar Produto</h4>
             <p class="card-description"> TriunfoStore v1 </p>
-            <form class="forms-sample" action="adicionarproduto2.php" method="POST">
+            <form class="forms-sample" action="criarprodutotmp.php" method="POST">
               <div class="form-group">
                 <label for="exampleInputModelo1">Link do produto:</label>
-                <input type="text" class="form-control" id="exampleInputModelo1" name="linkProduto" placeholder='Ex: "https://www.casasbahia.com.br/geladeira-smart-samsung-frost-free-french-door-rf27-com-soundbar-564l-black-inox/p/55066330"'>
+                <input type="text" class="form-control" id="url" name="url" placeholder='Ex: "https://www.casasbahia.com.br/geladeira-smart-samsung-frost-free-french-door-rf27-com-soundbar-564l-black-inox/p/55066330"'>
               </div>
               <button type="submit" class="btn btn-primary me-2">Continuar</button>
             </form>

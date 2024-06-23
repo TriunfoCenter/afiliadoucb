@@ -1,20 +1,181 @@
-<?php 
+<?php
 session_start();
 
-include('../../../src/settings/conexao.php');
-
-$sql = "SELECT * FROM admin WHERE id = 1";
-$resultt = $conn->query($sql);
-
-if ($resultt->num_rows == 1) {
-  $dados = $resultt->fetch_assoc();
-  $nomeLogin = ucfirst(strtolower($dados['login']));
-} else {
-  echo "Nenhum resultado encontrado.";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verifica se foi enviado um campo 'caminhoCompleto' via POST
+    if (isset($_POST['caminhoCompleto'])) {
+        // Remove qualquer entidade HTML não desejada do caminho completo
+        $caminhoCompleto = $_POST['caminhoCompleto'];
+    }
 }
 
+// Inclui o arquivo de conexão com o banco de dados
+include('../../../src/settings/conexao.php');
 
+// Verifica se o caminho completo foi definido
+if (!isset($caminhoCompleto)) {
+    die("O caminho completo não foi especificado.");
+}
+
+// Caminho para o arquivo que contém as informações do produto
+$caminho_arquivo = $caminhoCompleto;
+
+// Verifica se o arquivo existe
+if (!file_exists($caminho_arquivo)) {
+    die("O arquivo de origem não existe.");
+}
+
+// Carrega o conteúdo do arquivo product_source.php
+$conteudo = file_get_contents($caminho_arquivo);
+
+// Função para extrair o título do produto
+function extrairTitulo($html) {
+    // Expressão regular para encontrar o título dentro da tag <h1>
+    $pattern = '/<h1 class="dsvia-heading css-1cx4w9k">(.*?)<\/h1>/s';
+    preg_match($pattern, $html, $matches);
+
+    if (isset($matches[1])) {
+        // Obtém as quatro primeiras palavras do título
+        $palavras = explode(' ', $matches[1]);
+        $titulo = implode(' ', array_slice($palavras, 0, 4));
+        return $titulo; // Retorna o título encontrado
+    } else {
+        return ''; // Retorna um valor padrão caso não encontre o título
+    }
+}
+
+// Função para extrair o código do item do link
+function extrairCodigoItem($caminhoCompleto) {
+    $pattern = '/\/p\/([0-9]+)$/';
+    preg_match($pattern, $caminhoCompleto, $matches);
+    return isset($matches[1]) ? $matches[1] : '';
+}
+
+// Extrai o título do produto
+$titulo = extrairTitulo($conteudo);
+
+// Remove caracteres indesejados do nome da pasta
+$nome_pasta = preg_replace('/[^a-zA-Z0-9\- ]/', '', $titulo);
+
+// Substitui espaços por hífens no nome da pasta
+$nome_pasta = str_replace(' ', '-', $nome_pasta);
+
+// Remove hífens duplicados
+$nome_pasta = preg_replace('/-{2,}/', '-', $nome_pasta);
+
+// Extrai o código do item
+$codigo_item = extrairCodigoItem($caminhoCompleto);
+
+// Define o caminho da pasta e o nome do arquivo
+$caminho_pasta = '../../produtos/' . $nome_pasta;
+$caminho_arquivo_destino = $caminho_pasta . '/' . $codigo_item . '.php';
+
+// Cria a pasta se não existir
+if (!is_dir($caminho_pasta)) {
+    mkdir($caminho_pasta, 0777, true);
+}
+
+// Salva o conteúdo em um arquivo com o nome definido
+file_put_contents($caminho_arquivo_destino, $conteudo);
+
+// Exclui o arquivo antigo após lê-lo
+if (file_exists($caminho_arquivo)) {
+    unlink($caminho_arquivo);
+}
+
+// Função para extrair o valor do produto
+function extrairValorProduto($html) {
+    $dom = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $dom->loadHTML($html);
+    libxml_clear_errors();
+
+    $xpath = new DOMXPath($dom);
+    $elements = $xpath->query("//p[@class='dsvia-text css-alcf85']//span[@class='css-1vmkvrm']");
+
+    if ($elements->length > 0) {
+        $element = $elements->item(0);
+        
+        $valor = trim(str_replace(['R$', '&nbsp;'], '', $element->nodeValue));
+        $valor = preg_replace('/[^0-9\,]/', '', $valor); // Remove todos os caracteres não numéricos exceto vírgulas
+        $valor = str_replace(',', '.', $valor); // Substitui vírgulas por pontos para formatação correta do float
+        return number_format(floatval($valor), 2, ',', '.'); // Formata o valor com vírgulas e ponto
+    } else {
+        return ''; // Retorna um valor padrão caso não encontre o valor
+    }
+}
+
+// Extrai o valor do produto
+$valor_produto = extrairValorProduto($conteudo);
+
+$pattern = '/https:\/\/imgs\.casasbahia\.com\.br\/\d+\/([0-9]+)[a-zA-Z0-9]+\.jpg\?imwidth=\d+/';
+// Inicializa array para armazenar os links das imagens
+$links_imagens = [];
+
+preg_match_all($pattern, $conteudo, $matches, PREG_SET_ORDER);
+
+// Armazena os links encontrados no array $links_imagens
+foreach ($matches as $match) {
+    $grupo = $match[1]; // Captura o grupo (1, 2, 3, 4)
+    $link = preg_replace('/\?imwidth=\d+$/', '', $match[0]); // Remove o parâmetro width da URL
+    if (!isset($links_imagens[$grupo]) || !in_array($link, $links_imagens)) {
+        $links_imagens[$grupo] = $link;
+    }
+}
+
+// Inicializa o HTML para os links das imagens
+$html_links = '';
+
+// Loop para gerar HTML para cada link de imagem dentro de uma linha de tabela
+foreach ($links_imagens as $grupo => $link) {
+    $html_links .= '<tr>
+                      <td>Imagem ' . $grupo . '</td>
+                      <td><a>' . $link . '</a></td>
+                      <td> 
+                        <button type="button" class="btn btn-outline-warning">
+                            <i class="mdi mdi-pencil"></i>
+                        </button>
+                        
+                        <button type="button" class="btn btn-outline-danger">
+                            <i class="mdi mdi-delete-forever"></i>
+                        </button>   
+                      </td>
+                    </tr>';
+}
+// Inicializa o HTML para as imagens
+$html_imagens = '';
+
+// Loop para gerar HTML para cada imagem
+foreach ($links_imagens as $grupo => $link) {
+    $html_imagens .= '<div class="carder" style="width: 324px; float: left; margin-right: 10px; margin-bottom: 10px;">
+                        <h4>Imagem ' . $grupo . '</h4>
+                        <img src="' . $link . '" alt="Imagem ' . $grupo . '" style="width: 100%;">
+                      </div>';
+}
+
+// Consulta ao banco de dados para obter as categorias
+$sql = "SELECT nomeloja, nomelogin FROM config WHERE id = 1";
+$result = $conn->query($sql);
+
+// Verifica se a consulta retornou algum resultado
+if ($result->num_rows > 0) {
+    // Extrai a linha de resultado como um array associativo
+    $row = $result->fetch_assoc();
+    // Salva o valor da coluna 'nomeloja' em uma variável
+    $nomeloja = ucfirst($row['nomeloja']);
+    $nomeLogin = ucfirst($row['nomelogin']);
+} else {
+    echo "Nenhum resultado encontrado.";
+}
+
+// Fecha a conexão com o banco de dados
+$conn->close();
 ?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -322,12 +483,12 @@ if ($resultt->num_rows == 1) {
                       
                       <div class="form-group">
                         <label for="exampleInputMarca3">Nome</label>
-                        <input type="text" class="form-control" id="exampleInputMarca3" placeholder="Nome" value="Nome">
+                        <input type="text" class="form-control" id="exampleInputMarca3" placeholder="Nome" value="<?php echo $titulo; ?>">
                       </div>
                       
                       <div class="form-group">
                         <label for="exampleInputAtual4">Valor</label>
-                        <input type="text" class="form-control" id="exampleInputAtual4" placeholder="Valor" value="Valor">
+                        <input type="text" class="form-control" id="exampleInputAtual4" placeholder="Valor" value="<?php echo htmlspecialchars($valor_produto); ?>">
                       </div>
                      
                       
@@ -354,48 +515,12 @@ if ($resultt->num_rows == 1) {
                     
                   </div>
                      
-                  <div class="row">
-<div class="col-12 grid-margin stretch-card">
-             
-  <div class="carder">
-      <span>Imagem 1</span>
-    <img src="https://imgs.casasbahia.com.br/55060824/1g.jpg?imwidth=384" alt="Imagem 1">
-    
-  </div>
-  <div class="carder">
-      <span>Imagem 2</span>
-    <img src="https://imgs.casasbahia.com.br/55060824/2g.jpg?imwidth=384" alt="Imagem 2">
-    
-  </div>
-  <div class="carder">
-      <span>Imagem 3</span>
-    <img src="https://imgs.casasbahia.com.br/55060824/1g.jpg?imwidth=384" alt="Imagem 3">
-    
-  </div>
-  <div class="carder">
-      <span>Imagem 4</span>
-    <img src="https://imgs.casasbahia.com.br/55060824/2g.jpg?imwidth=384" alt="Imagem 4">
-  </div>
-  <div class="carder">
-  <form class="file-upload-form">
-  <label for="file" class="file-upload-label">
-    <div class="file-upload-design">
-      <svg viewBox="0 0 640 512" height="1em">
-        <path
-          d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"
-        ></path>
-      </svg>
-      <p>Drag and Drop</p>
-      <p>or</p>
-      <span class="browse-button">Browse file</span>
+                  <!-- Divisão principal para exibição das imagens -->
+<!-- Divisão principal para exibição das imagens -->
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <?php echo $html_imagens; ?>
     </div>
-    <input id="file" type="file" />
-  </label>
-</form>
-</div>
-
-</div>
-
 </div>
 
                   <div class="row">
@@ -409,78 +534,18 @@ if ($resultt->num_rows == 1) {
                       <table class="table table-striped">
                         <thead>
                           <tr>
-                            <th>
-                              <div class="form-check form-check-muted m-0">
-                                <label class="form-check-label">
-                                  <input type="checkbox" class="form-check-input">
-                                <i class="input-helper"></i></label>
-                              </div>
-                            </th>
+                            
                             <th> N° Imagem </th>
-                            <th> Config </th>
+                            <th> Caminho </th>
+                            <th> Editar | Excluir </th>
                           </tr>
                         </thead>
-                        <tbody>
-
-                        <?php
-  if ($result->num_rows > 0) {
-    
-    while ($linha = $result->fetch_assoc()) {
-        
-        $imagem = $linha["imagem"];
-        $caminho  = $linha["caminho"];
-        
-
-        echo '<tr>';
-        echo '<td>';
-        echo '<div class="form-check form-check-muted m-0">';
-        echo '<label class="form-check-label">';
-        echo '<input type="checkbox" class="form-check-input">';
-        echo '<i class="input-helper"></i></label>';
-        echo '</div>';
-        echo '</td>';
-        echo '<td class="py-1">';
-        echo '<img src="../../assets/images/faces-clipart/pic-1.png" alt="image" />';
-        echo '</td>';
-        echo '<td>' . $imagem . '</td>'; 
-        echo '<td>' . $caminho . '</td>';
-        echo '<td>';
-        echo '<div class="table-actions">';
-        echo '<a class="btn btn-sm btn-icon btn-primary" href="https://wowy.botble.com/admin/system/roles/edit/1" data-bs-toggle="tooltip" data-bs-original-title="Edit">';
-        echo '<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: 6px auto 0;">';
-        echo '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>';
-        echo '<path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>';
-        echo '<path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>';
-        echo '<path d="M16 5l3 3"></path>';
-        echo '</svg>';    
-        echo '</a>';
-        echo '<a class="btn btn-sm btn-icon btn-danger" href="https://wowy.botble.com/admin/system/roles/1" data-bs-toggle="tooltip" data-bs-original-title="Delete" data-dt-single-action="" data-method="DELETE" data-confirmation-modal="true" data-confirmation-modal-title="Confirm delete" data-confirmation-modal-message="Do you really want to delete this record?" data-confirmation-modal-button="Delete" data-confirmation-modal-cancel-button="Cancel">';
-        echo '<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: 6px auto 0;">';
-        echo '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>';
-        echo '<path d="M4 7l16 0"></path>';
-        echo '<path d="M10 11l0 6"></path>';
-        echo '<path d="M14 11l0 6"></path>';
-        echo '<path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>';
-        echo '<path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>';
-        echo '</svg>';    
-        echo '</a>';
-        echo '</div>';
-        echo '</td>';
-        echo '</tr>';
-                                          
-        
-    }
-  } else {
-    echo "Nenhum comentário encontrado.";
-  }
-
-
-  ?>
-
-
-
-
-                        </tbody>
+                        
+                        
+                       
+                <?php echo $html_links; ?>
+                
+            </tbody>
                       </table>
                     </div>
                   </div>

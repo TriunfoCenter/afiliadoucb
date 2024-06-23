@@ -2,6 +2,7 @@
 session_start();
 include('../../../src/settings/conexao.php');
 
+
 /* 
 
 $sql = "SELECT * FROM vendas ORDER BY id DESC";
