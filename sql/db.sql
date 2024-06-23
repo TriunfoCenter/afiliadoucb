@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 6.0.0-dev+20240127.675dc8de1a
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 12, 2024 at 10:32 AM
+-- Generation Time: Jun 23, 2024 at 05:03 AM
 -- Server version: 8.3.0
--- PHP Version: 8.2.19
+-- PHP Version: 8.1.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -68,26 +68,55 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id`, `nome`, `link`) VALUES
-(49, 'iPhone', NULL),
-(50, 'Smartphones', NULL),
-(51, 'TV\'s', NULL),
-(52, 'Eletrodomésticos', NULL),
-(53, 'Móveis', NULL),
-(54, 'Informática', NULL),
-(55, 'Eletroportáteis', NULL),
-(56, 'Inverno', NULL),
-(57, 'Beleza', NULL),
-(58, 'Utilidades Domésticas', NULL),
-(59, 'Áudio', NULL),
-(60, 'Games', NULL),
-(61, 'Ar e Ventilação', NULL),
-(62, 'Perfumaria', NULL),
-(63, 'Automotivo', NULL),
-(64, 'Ferramentas', NULL),
-(65, 'Acessórios', NULL),
-(66, 'Bebidas', NULL),
-(67, 'Cama & Banho', NULL),
-(68, 'Malas e acessórios', NULL);
+(69, 'air fryer', '//www.casasbahia.com.br/air-fryer/b'),
+(70, 'armario de cozinha', '//www.casasbahia.com.br/armario-de-cozinha/b'),
+(71, 'arroz', '//www.casasbahia.com.br/celular-gamer/b'),
+(72, 'brinquedo', '//www.casasbahia.com.br/brinquedo/b'),
+(73, 'cama', '//www.casasbahia.com.br/cama/b'),
+(74, 'celular', '//www.casasbahia.com.br/celular/b'),
+(75, 'celular motorola', '//www.casasbahia.com.br/celular-motorola/b'),
+(76, 'celular samsung', '//www.casasbahia.com.br/celular-samsung/b'),
+(77, 'cerveja', '//www.casasbahia.com.br/cerveja/b'),
+(78, 'colchão', '//www.casasbahia.com.br/colchao/b'),
+(79, 'computador', '//www.casasbahia.com.br/computador/b'),
+(80, 'feijão', '//www.casasbahia.com.br/feijao/b'),
+(81, 'ferro', '//www.casasbahia.com.br/ferro/b'),
+(82, 'fogão', '//www.casasbahia.com.br/fogao/b'),
+(83, 'fone de ouvido', '//www.casasbahia.com.br/fone-de-ouvido/b'),
+(84, 'fralda', '//www.casasbahia.com.br/fralda/b'),
+(85, 'galaxy', '//www.casasbahia.com.br/galaxy/b'),
+(86, 'galaxy a', '//www.casasbahia.com.br/galaxy-a/b'),
+(87, 'galaxy m', '//www.casasbahia.com.br/galaxy-m/b'),
+(88, 'galaxy s', '//www.casasbahia.com.br/galaxy-s/b'),
+(89, 'guarda roupa', '//www.casasbahia.com.br/guarda-roupa/b'),
+(90, 'iphone', '//www.casasbahia.com.br/iphone/b'),
+(91, 'iphone 11', '//www.casasbahia.com.br/iphone-11/b'),
+(92, 'iphone 12', '//www.casasbahia.com.br/iphone-12/b'),
+(93, 'iphone 13', '//www.casasbahia.com.br/iphone-13/b'),
+(94, 'iphone 14', '//www.casasbahia.com.br/iphone-14/b'),
+(95, 'iphone 15', '//www.casasbahia.com.br/iphone-15/b'),
+(96, 'lava e seca', '//www.casasbahia.com.br/lava-e-seca/b'),
+(97, 'liquidificador', '//www.casasbahia.com.br/liquidificador/b'),
+(98, 'livro', '//www.casasbahia.com.br/cerveja/b'),
+(99, 'máquina de lavar', '//www.casasbahia.com.br/maquina-de-lavar/b'),
+(100, 'notebook', '//www.casasbahia.com.br/notebook/b'),
+(101, 'notebook gamer', '//www.casasbahia.com.br/notebook-gamer/b'),
+(102, 'perfume', '//www.casasbahia.com.br/perfume/b'),
+(103, 'pneu', '//www.casasbahia.com.br/pneu/b'),
+(104, 'ração', '//www.casasbahia.com.br/racao/b'),
+(105, 'rack', '//www.casasbahia.com.br/rack/b'),
+(106, 'smart tv', '//www.casasbahia.com.br/smart-tv/b'),
+(107, 'smartphone', '//www.casasbahia.com.br/smartphone/b'),
+(108, 'smartwatch', '//www.casasbahia.com.br/smartwatch/b'),
+(109, 'sofa', '//www.casasbahia.com.br/sofa/b'),
+(110, 'ssd', '//www.casasbahia.com.br/ssd/b'),
+(111, 'tanquinho', '//www.casasbahia.com.br/tanquinho/b'),
+(112, 'teclado', '//www.casasbahia.com.br/teclado/b'),
+(113, 'tênis', '//www.casasbahia.com.br/tenis/b'),
+(114, 'tv', '//www.casasbahia.com.br/tv/b'),
+(115, 'vinho', '//www.casasbahia.com.br/vinho/b'),
+(116, 'whey', '//www.casasbahia.com.br/whey/b'),
+(117, 'xiaomi', '//www.casasbahia.com.br/xiaomi/b');
 
 -- --------------------------------------------------------
 
@@ -147,15 +176,28 @@ CREATE TABLE `config` (
   `verifysms` tinyint(1) DEFAULT NULL,
   `mobileordesktop` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `manutencao` tinyint(1) DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `email` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nomeloja` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `vencimentoboleto` int DEFAULT NULL,
+  `centralAtendimento` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `localidade` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `cep` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `complemento` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `bairro` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `cidade` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `estado` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `favicon` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `banner` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `cor` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nomelogin` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `config`
 --
 
-INSERT INTO `config` (`id`, `chavepix`, `carteirabtc`, `token`, `googlerecaptchakey`, `googlerecaptchasecret`, `verifyemail`, `verifysms`, `mobileordesktop`, `manutencao`, `email`) VALUES
-(1, 'chave_pix_aleatoria', 'carteira_btc_aleatoria', 'token_aleatorio', 'google_recaptcha_key_aleatoria', 'google_recaptcha_secret_aleatorio', 0, 0, 'A', 0, 'castro@app.com');
+INSERT INTO `config` (`id`, `chavepix`, `carteirabtc`, `token`, `googlerecaptchakey`, `googlerecaptchasecret`, `verifyemail`, `verifysms`, `mobileordesktop`, `manutencao`, `email`, `nomeloja`, `vencimentoboleto`, `centralAtendimento`, `localidade`, `cep`, `complemento`, `bairro`, `cidade`, `estado`, `favicon`, `banner`, `cor`, `nomelogin`) VALUES
+(1, 'chave_pix_aleatoria', 'carteira_btc_aleatoria', 'token_aleatorio', 'google_recaptcha_key_aleatoria', 'google_recaptcha_secret_aleatorio', 0, 0, 'A', 0, 'castro@app.com', 'Triunfo Store', 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'castro');
 
 -- --------------------------------------------------------
 
@@ -231,6 +273,33 @@ INSERT INTO `moderadores` (`id`, `login`, `senha`, `email`, `mensagensrespondida
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notificacoes`
+--
+
+CREATE TABLE `notificacoes` (
+  `id` int NOT NULL,
+  `titulo` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `icone` text COLLATE utf8mb4_general_ci,
+  `mensagem` text COLLATE utf8mb4_general_ci,
+  `formaPagamento` text COLLATE utf8mb4_general_ci,
+  `tipo` text COLLATE utf8mb4_general_ci,
+  `valor` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `notificacoes`
+--
+
+INSERT INTO `notificacoes` (`id`, `titulo`, `icone`, `mensagem`, `formaPagamento`, `tipo`, `valor`) VALUES
+(1, 'Boleto Gerado', 'mdi mdi-file-document', 'Boleto no valor de R$ 150,00 gerado.', 'Boleto', 'Gerado', 'R$ 150,00'),
+(2, 'Pagamento Recebido', 'mdi mdi-cash-multiple', 'Pagamento confirmado para o pedido #123.', 'Dinheiro', 'Recebido', 'R$ 200,00'),
+(3, 'Pix Recebido', 'mdi mdi-qrcode-scan', 'Recebido pagamento via Pix no valor de R$ 80,00.', 'Pix', 'Recebido', 'R$ 80,00'),
+(4, 'Pagamento Pendente', 'mdi mdi-clock-outline', 'Aguardando confirmação do pagamento.', 'Cartão de Crédito', 'Pendente', 'R$120,00'),
+(5, 'Transferência Realizada', 'mdi mdi-bank-transfer', 'Transferência no valor de R$ 300,00 efetuada.', 'Transferência Bancária', 'Realizada', 'R$ 300,00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pagamentos`
 --
 
@@ -255,28 +324,6 @@ INSERT INTO `pagamentos` (`id`, `produto`, `valor`, `forma_pagamento`, `img`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pagepainel`
---
-
-CREATE TABLE `pagepainel` (
-  `id` int NOT NULL,
-  `titulo_site` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `favicon` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `banner` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `titulo` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `cor` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `pagepainel`
---
-
-INSERT INTO `pagepainel` (`id`, `titulo_site`, `favicon`, `banner`, `titulo`, `cor`) VALUES
-(1, 'Triunfo Store', 'favicon1.png', 'banner1.png', NULL, NULL);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `produtos`
 --
 
@@ -284,15 +331,18 @@ CREATE TABLE `produtos` (
   `id` int NOT NULL,
   `modelo` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `marca` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `texto` text COLLATE utf8mb4_general_ci,
+  `descricao` text COLLATE utf8mb4_general_ci,
   `quantidadevisitas` int DEFAULT '0',
   `destaque` tinyint(1) DEFAULT '0',
   `link` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `valoratual` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `valoranterior` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `valor` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `valorpix` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `img` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `tamanho` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `tamanho` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nome` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `codigoitem` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `loja` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `comentarios` text COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -337,7 +387,7 @@ CREATE TABLE `redessociais` (
 --
 
 INSERT INTO `redessociais` (`whatsapp`, `facebook`, `linkedin`, `twitter`, `Youtube`, `Instagram`, `id`) VALUES
-('+55629844094949', 'castrofaceb', 'castrolinkedin', 'castrotwitter', 'castroyoutube', 'castroinsta', 1);
+('+5561986169322', 'triunfostorefaceb', 'triunfostorelinkedin', 'triunfostoretwitter', 'triunfostoreyoutube', 'triunfostoreinsta', 1);
 
 -- --------------------------------------------------------
 
@@ -528,15 +578,15 @@ ALTER TABLE `moderadores`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `pagamentos`
+-- Indexes for table `notificacoes`
 --
-ALTER TABLE `pagamentos`
+ALTER TABLE `notificacoes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `pagepainel`
+-- Indexes for table `pagamentos`
 --
-ALTER TABLE `pagepainel`
+ALTER TABLE `pagamentos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -595,7 +645,7 @@ ALTER TABLE `anotacoes`
 -- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT for table `chat`
@@ -634,16 +684,16 @@ ALTER TABLE `moderadores`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `notificacoes`
+--
+ALTER TABLE `notificacoes`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `pagamentos`
 --
 ALTER TABLE `pagamentos`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `pagepainel`
---
-ALTER TABLE `pagepainel`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `produtos`
