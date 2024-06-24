@@ -433,8 +433,14 @@ mysqli_close($conn);
                       <table class="table">
                         <thead>
                           <tr>
+                          <th>
+                              <div class="form-check form-check-muted m-0">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input">
+                                <i class="input-helper"></i></label>
+                              </div>
+                            </th>
                             
-                            <th> <?php echo "IMG"; ?> </th>
                             
                             <th> Nome do Cliente </th>
                             <th> Email Completo </th>
@@ -452,11 +458,15 @@ mysqli_close($conn);
                           </div>
                           <tr>
                         
-                          
-                            
-                            <td>
-                              <img src="../../assets/images/faces/face1.jpg" alt="image" />
+                          <td>
+                              <div class="form-check form-check-muted m-0">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input">
+                                <i class="input-helper"></i></label>
+                              </div>
                             </td>
+                            
+                            
                             
                             <td> <?php echo $dado['nome']; ?> </td>
                             <td> <?php echo $dado['email']; ?> </td>
