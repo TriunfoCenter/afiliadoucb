@@ -168,8 +168,14 @@ if ($result->num_rows > 0) {
     echo "Nenhum resultado encontrado.";
 }
 
+$query = "SELECT titulo, icone, mensagem FROM notificacoes ORDER BY id DESC";
+$resultado = $conn->query($query);
+
 // Fecha a conexão com o banco de dados
 $conn->close();
+
+
+
 ?>
 
 
@@ -381,47 +387,56 @@ $conn->close();
                   <i class="mdi mdi-bell"></i>
                   <span class="count bg-danger"></span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                  <h6 class="p-3 mb-0">Notificações</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-calendar text-success"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Event today</p>
-                      <p class="text-muted ellipsis mb-0"> Just a reminder that you have an event today </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-settings text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Settings</p>
-                      <p class="text-muted ellipsis mb-0"> Update dashboard </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-link-variant text-warning"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Launch Admin</p>
-                      <p class="text-muted ellipsis mb-0"> New admin wow! </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">Veja as notificações</p>
-                </div>
+                <?php
+                if ($resultado->num_rows > 0) {
+                  echo '<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">';
+                  echo '<h6 class="p-3 mb-0">Notificações</h6>';
+                  echo '<div class="dropdown-divider"></div>';
+              
+                  // Itera sobre os resultados e gera o HTML para cada notificação
+                  while ($row = $resultado->fetch_assoc()) {
+                      $title = $row['titulo'];
+                      $icone = $row['icone'];
+                      $mensagem = $row['mensagem'];
+              
+                      // Verifica a cor com base no título
+                      if (stripos($title, 'Recebido') !== false) {
+                          $iconColor = 'text-success';
+                      } elseif (stripos($title, 'Pendente') !== false) {
+                          $iconColor = 'text-warning';
+                      } elseif (stripos($title, 'Cancelado') !== false) {
+                          $iconColor = 'text-danger';
+                      }elseif (stripos($title, 'Gerado') !== false) {
+                        $iconColor = 'text-warning';
+                      }else {
+                          $iconColor = 'text-success';
+                      }
+              
+                      echo '<a class="dropdown-item preview-item">';
+                      echo '  <div class="preview-thumbnail">';
+                      echo '      <div class="preview-icon bg-dark rounded-circle">';
+                      echo "          <i class=\"mdi $icone $iconColor\"></i>";
+                      echo '      </div>';
+                      echo '  </div>';
+                      echo '  <div class="preview-item-content">';
+                      echo "      <p class=\"preview-subject mb-1\">$title</p>";
+                      echo "      <p class=\"text-muted ellipsis mb-0\">$mensagem</p>";
+                      echo '  </div>';
+                      echo '</a>';
+                      echo '<div class="dropdown-divider"></div>';
+                  }
+              
+                  echo '<p class="p-3 mb-0 text-center">Veja as notificações</p>';
+                  echo '</div>';
+              } else {
+                  // Caso não haja notificações
+                  echo '<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">';
+                  echo '<h6 class="p-3 mb-0">Notificações</h6>';
+                  echo '<div class="dropdown-divider"></div>';
+                  echo '<p class="p-3 mb-0 text-center">Nenhuma notificação encontrada</p>';
+                  echo '</div>';
+              }
+?>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
@@ -494,24 +509,25 @@ $conn->close();
                       
 
                   </fieldset>
+                  
                   <div>
 
                       <label for="exampleInputPix4">Formas de Pagamento</label>
-                    <div class="form-check form-switch">
                       
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                      <label class="form-check-label" for="flexSwitchCheckDefault">ACEITAR CARTÃO</label>
-                    </div>
+                      <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input"> Aceitar Cartão <i class="input-helper"></i></label>
+                            </div>
 
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                      <label class="form-check-label" for="flexSwitchCheckDefault">ACEITAR PIX</label>
-                    </div>
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input"> Aceitar Pix <i class="input-helper"></i></label>
+                            </div>
 
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                      <label class="form-check-label" for="flexSwitchCheckDefault">ACEITAR BOLETO</label>
-                    </div>
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input"> Aceitar Boleto <i class="input-helper"></i></label>
+                            </div>
                     
                   </div>
                      
@@ -522,6 +538,35 @@ $conn->close();
         <?php echo $html_imagens; ?>
     </div>
 </div>
+<div class="form-group">
+  <label>Acrescentar Imagem</label>
+  <input type="file" name="img[]" class="file-upload-default" accept=".jpeg, .jpg, .png, .webp" id="file-upload" onchange="validateFileType()">
+  <div class="input-group col-xs-12">
+    <input type="text" class="form-control file-upload-info" disabled="" placeholder="Carregar imagem">
+    <span class="input-group-append">
+      <button class="file-upload-browse btn btn-primary" type="button">Carregar</button>
+    </span>
+  </div>
+  <div id="file-upload-error" style="color: red; display: none;">Por favor, selecione uma imagem nos formatos jpeg, jpg, png, ou webp</div>
+</div>
+
+<script>
+  function validateFileType() {
+    const fileInput = document.getElementById('file-upload');
+    const filePath = fileInput.value;
+    const allowedExtensions = /(\.jpeg|\.jpg|\.png|\.webp)$/i;
+    const errorDiv = document.getElementById('file-upload-error');
+    
+    if (!allowedExtensions.exec(filePath)) {
+      fileInput.value = '';
+      errorDiv.style.display = 'block';
+      return false;
+    } else {
+      errorDiv.style.display = 'none';
+    }
+  }
+</script>
+
 
                   <div class="row">
               <div class="col-lg-12 grid-margin stretch-card">

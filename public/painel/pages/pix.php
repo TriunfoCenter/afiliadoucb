@@ -33,6 +33,10 @@ if ($resultt->num_rows == 1) {
   echo "Nenhum resultado encontrado.";
 }
 
+$query = "SELECT titulo, icone, mensagem FROM notificacoes ORDER BY id DESC";
+$resultado = $conn->query($query);
+
+
 
 ?>
 
@@ -273,47 +277,56 @@ if ($resultt->num_rows == 1) {
                   <i class="mdi mdi-bell"></i>
                   <span class="count bg-danger"></span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                  <h6 class="p-3 mb-0">Notificações</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-calendar text-success"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Event today</p>
-                      <p class="text-muted ellipsis mb-0"> Just a reminder that you have an event today </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-settings text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Settings</p>
-                      <p class="text-muted ellipsis mb-0"> Update dashboard </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-link-variant text-warning"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Launch Admin</p>
-                      <p class="text-muted ellipsis mb-0"> New admin wow! </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">Veja as notificações</p>
-                </div>
+                <?php
+                if ($resultado->num_rows > 0) {
+                  echo '<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">';
+                  echo '<h6 class="p-3 mb-0">Notificações</h6>';
+                  echo '<div class="dropdown-divider"></div>';
+              
+                  // Itera sobre os resultados e gera o HTML para cada notificação
+                  while ($row = $resultado->fetch_assoc()) {
+                      $titulo = $row['titulo'];
+                      $icone = $row['icone'];
+                      $mensagem = $row['mensagem'];
+              
+                      // Verifica a cor com base no título
+                      if (stripos($titulo, 'Recebido') !== false) {
+                          $iconColor = 'text-success';
+                      } elseif (stripos($titulo, 'Pendente') !== false) {
+                          $iconColor = 'text-warning';
+                      } elseif (stripos($titulo, 'Cancelado') !== false) {
+                          $iconColor = 'text-danger';
+                      }elseif (stripos($titulo, 'Gerado') !== false) {
+                        $iconColor = 'text-warning';
+                      }else {
+                          $iconColor = 'text-success';
+                      }
+              
+                      echo '<a class="dropdown-item preview-item">';
+                      echo '  <div class="preview-thumbnail">';
+                      echo '      <div class="preview-icon bg-dark rounded-circle">';
+                      echo "          <i class=\"mdi $icone $iconColor\"></i>";
+                      echo '      </div>';
+                      echo '  </div>';
+                      echo '  <div class="preview-item-content">';
+                      echo "      <p class=\"preview-subject mb-1\">$titulo</p>";
+                      echo "      <p class=\"text-muted ellipsis mb-0\">$mensagem</p>";
+                      echo '  </div>';
+                      echo '</a>';
+                      echo '<div class="dropdown-divider"></div>';
+                  }
+              
+                  echo '<p class="p-3 mb-0 text-center">Veja as notificações</p>';
+                  echo '</div>';
+              } else {
+                  // Caso não haja notificações
+                  echo '<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">';
+                  echo '<h6 class="p-3 mb-0">Notificações</h6>';
+                  echo '<div class="dropdown-divider"></div>';
+                  echo '<p class="p-3 mb-0 text-center">Nenhuma notificação encontrada</p>';
+                  echo '</div>';
+              }
+?>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
